@@ -56,7 +56,7 @@ int q1(char *data){
 
   j=0;
   i=tam_dia+1;
-  while(data[i] > 47){ //Verificar mes
+  while(data[i] > 47){ //Verificar mês
     mm[j] = data[i];
     j++;
     i++;
@@ -85,7 +85,7 @@ int q1(char *data){
   mes = atoi(mm);
   ano = atoi(aa);
   
-  //validacao das datas
+  //validação das datas
   if((mes >= 1 && mes <= 12) && (dia >= 1 && dia <= 31) && (ano >= 10 && ano <= 9999)){
     if((mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) && (dia >= 1 && dia <= 31)){
       return datavalida;
@@ -243,17 +243,17 @@ int q3(char *texto, char c, int isCaseSensitive){
     }
   tam_texto++;
   }
-  return qnt_ocorrencias; //retorna numero de ocorrencias do carater buscado
+  return qnt_ocorrencias; //retorna número de ocorrências do caracter buscado
   }
 
   else
-  while(texto[tam_texto]!='\0'){ 
+  while(texto[tam_texto]!='\0'){  //verifica se o caracter é igual a ele ou sua varição(minúscula/maiúscula) pela tabela ascii
      if((texto[tam_texto] == c) || (texto[tam_texto] == c + 32) || (texto[tam_texto] == c - 32)){
      qnt_ocorrencias++;
     }
   tam_texto++;
   }
-  return qnt_ocorrencias; //retorna numero de ocorrencias do carater buscado
+  return qnt_ocorrencias; //retorna numero de ocorrências do caracter buscado
 }
 
 /*
@@ -283,19 +283,19 @@ int q4(char *strTexto, char *strBusca, int posicoes[30]){
     if(strTexto[i]==-95 || strTexto[i]==-87 || strTexto[i]==-83 || strTexto[i]==-77 || strTexto[i]==-70 || strTexto[i]==-93 || strTexto[i]==-89 || strTexto[i]==-76)
        cont_acento++; //Contagem de caracteres com acento
     if(strBusca[0] == strTexto[i]){
-      verificador_repeticao = 1; //Verifica se tem ocorrencia da palavra no texto
+      verificador_repeticao = 1; //Verifica se tem ocorrência da palavra no texto
       for(j = 0; j < tam_palavra; j++){
         if(strBusca[j] != strTexto[i + j]){
-          verificador_repeticao = 0; //Caso nao tenha o retorno sera 0
+          verificador_repeticao = 0; //Caso não tenha o retorno sera 0
           break;
         }
       }
-      if(verificador_repeticao == 1){ //Caso tenha ele ira contar o numero de repeticao, a posicao onde comeca e onde finaliza
+      if(verificador_repeticao == 1){ //Caso tenha ele ira contar o número de repeticões, a posicão onde comeca e onde finaliza
         cont_repeticao++;
         cont_posicao = cont_posicao + 2;
         qtdOcorrencias = cont_repeticao;
-        posicoes[cont_posicao] = i + 1 - cont_acento; //posicao inicial, caso tenha acento ele ira retirar o excesso
-        posicoes[cont_posicao+1] = i + tam_palavra - cont_acento; //posicao final, caso tenha acento ele ira retirar o excesso
+        posicoes[cont_posicao] = i + 1 - cont_acento; //posicão inicial, caso tenha acento ele ira retirar o excesso
+        posicoes[cont_posicao+1] = i + tam_palavra - cont_acento; //posicão final, caso tenha acento ele ira retirar o excesso
       }
     }   
   } 
@@ -337,16 +337,16 @@ int q6(int numerobase, int numerobusca){
   int guard_numero, qtdOcorrencias = 0;
   int tamanho = 1;
 
-  guard_numero = numerobusca;
+  guard_numero = numerobusca; 
 
-  while(guard_numero != 0){
+  while(guard_numero != 0){ //Enquanto K for diferente de zero ele sera dividido para calcular seu tamanho
   tamanho = tamanho * 10;
   guard_numero = guard_numero / 10;
 }
   guard_numero = numerobase;
 
   while(guard_numero != 0){
-    if(guard_numero % tamanho == numerobusca){
+    if(guard_numero % tamanho == numerobusca){ //Verifica se o resto da divisao do numero é igual a K 
       qtdOcorrencias++;
       guard_numero = guard_numero / tamanho;
     }
