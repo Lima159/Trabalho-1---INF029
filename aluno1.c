@@ -175,6 +175,7 @@ int q2(char *datainicial, char *datafinal, int *qtdDias, int *qtdMeses, int *qtd
     char dd[2], mm[2], aa[4];
     int diainicial, mesinicial, anoinicial;
     int diafinal, mesfinal, anofinal;
+    int calculovalido = 0;
 
     if(q1(datainicial) == 1){ 
       puxardatas(datainicial, &dia, &mes, &ano);
@@ -199,27 +200,84 @@ int q2(char *datainicial, char *datafinal, int *qtdDias, int *qtdMeses, int *qtd
         return 4;
     }
 
-    
-    
-    /*nDias = nDias;
-    nMeses = nMeses;
-    nAnos = nAnos;
-
-
-
-
-
-
+    else{
+    nAnos = anofinal - anoinicial;
+    if(mesfinal >= mesinicial){
+      nMeses = mesfinal - mesinicial;
+      if(diafinal >= diainicial){
+        nDias = diafinal - diainicial;
+      }
+      else if(diafinal < diainicial){
+        nDias = diainicial - diafinal;
+        nMeses = nMeses -1;
+        if(((anofinal%400==0 || (anofinal%4 == 0 && anofinal%100 != 0)) && (anoinicial%400==0 || (anoinicial%4 == 0 && anoinicial%100 != 0))) || ((anofinal%400==0 || (anofinal%4 == 0 && anofinal%100 != 0)) && (anoinicial%400!=0 || (anoinicial%4 != 0 && anoinicial%100 == 0)))){
+          if((mesfinal==2) || (mesinicial==2)){
+            nDias = 29 - nDias;
+          }
+          else if(((mesfinal == 4) || (mesfinal == 6) || (mesfinal == 9) || (mesfinal == 11)) || ((mesinicial == 4) || (mesinicial == 6) || (mesinicial == 9) || (mesinicial == 11))){
+            nDias = 30 - nDias;
+          }
+          else if((mesfinal == 1 || mesfinal == 3 || mesfinal == 5 || mesfinal == 7 || mesfinal == 8 || mesfinal == 10 || mesfinal == 12) || (mesinicial == 1 || mesinicial == 3 || mesinicial == 5 || mesinicial == 7 || mesinicial == 8 || mesinicial == 10 || mesinicial == 12)){
+            nDias = 31 - nDias;
+          }
+        }
+        else{
+          if((mesfinal == 2) || (mesinicial == 2)){
+            nDias = 28 - nDias;
+          }
+          else if(((mesfinal == 4) || (mesfinal == 6) || (mesfinal == 9) || (mesfinal == 11)) || ((mesinicial == 4) || (mesinicial == 6) || (mesinicial == 9) || (mesinicial == 11))){
+            nDias = 30 - nDias;
+          }
+          else if((mesfinal == 1 || mesfinal == 3 || mesfinal == 5 || mesfinal == 7 || mesfinal == 8 || mesfinal == 10 || mesfinal == 12) || (mesinicial == 1 || mesinicial == 3 || mesinicial == 5 || mesinicial == 7 || mesinicial == 8 || mesinicial == 10 || mesinicial == 12)){
+            nDias = 31 - nDias;
+          }
+      }
+    }
+    else if(mesfinal < mesinicial){
+      nMeses = mesinicial - mesfinal;
+      nAnos = nAnos - 1;
+      nMeses = 12 - nMeses;
+      if(diafinal >= diainicial){
+        nDias = diafinal - diainicial;
+      }
+      else if(diafinal < diainicial){
+        nDias = diainicial - diafinal;
+        nMeses = nMeses -1;
+        if(((anofinal%400==0 || (anofinal%4 == 0 && anofinal%100 != 0)) && (anoinicial%400==0 || (anoinicial%4 == 0 && anoinicial%100 != 0))) || ((anofinal%400==0 || (anofinal%4 == 0 && anofinal%100 != 0)) && (anoinicial%400!=0 || (anoinicial%4 != 0 && anoinicial%100 == 0)))){
+          if((mesfinal==2) || (mesinicial==2)){
+            nDias = 29 - nDias;
+          }
+          else if((((mesfinal == 4) || (mesfinal == 6) || (mesfinal == 9) || mesfinal == 11)) || ((mesinicial == 4) || (mesinicial == 6) || (mesinicial == 9) || (mesinicial == 11))){
+            nDias = 30 - nDias;
+          }
+          else if((mesfinal == 1 || mesfinal == 3 || mesfinal == 5 || mesfinal == 7 || mesfinal == 8 || mesfinal == 10 || mesfinal == 12) || (mesinicial == 1 || mesinicial == 3 || mesinicial == 5 || mesinicial == 7 || mesinicial == 8 || mesinicial == 10 || mesinicial == 12)){
+            nDias = 31 - nDias;
+          }
+        }
+        else{
+          if((mesfinal == 2) || (mesinicial == 2)){
+            nDias = 28 - nDias;
+          }
+          else if(((mesfinal == 4) || (mesfinal == 6) || (mesfinal == 9) || (mesfinal == 11)) || ((mesinicial == 4) || (mesinicial == 6) || (mesinicial == 9) || (mesinicial == 11))){
+            nDias = 30 - nDias;
+          }
+          else if((mesfinal == 1 || mesfinal == 3 || mesfinal == 5 || mesfinal == 7 || mesfinal == 8 || mesfinal == 10 || mesfinal == 12) || (mesinicial == 1 || mesinicial == 3 || mesinicial == 5 || mesinicial == 7 || mesinicial == 8 || mesinicial == 10 || mesinicial == 12)){
+            nDias = 31 - nDias;
+          }
+        }
+    }
+    }
+  } 
+    calculovalido = 1;
+  } 
+  if(calculovalido ==1){
     *qtdDias = nDias;
-    *qtdAnos = nAnos;
     *qtdMeses = nMeses;
-
-    printf("%s\n", datainicial);
-    printf("%s\n", datafinal);
-
-    return 1;*/
-
-}
+    *qtdAnos = nAnos;
+    return 1;
+  } 
+    
+	}
 
 
 /*
