@@ -11,10 +11,10 @@
 //  O aluno deve preencher seus dados abaixo, e implementar as questões do trabalho
 
 //  ----- Dados do Aluno -----
-//  Nome:
-//  email:
+//  Nome: Igor Alexandre de Lima
+//  email: igoralwork@gmail.com
 //  Matrícula:
-//  Semestre:
+//  Semestre: 2018.1
 
 //  Copyright © 2016 Renato Novais. All rights reserved.
 // Última atualização: 20/06/2018 - 19/08/2016
@@ -45,7 +45,7 @@ int q1(char *data){
   int dia, mes, ano, i, tam_dia=0, tam_mes=0, tam_ano=0, j, x, a;
 
   i=0;
-  while(data[i] > 47){
+  while(data[i] > 47){ //Verificar dia
     dd[i]=data[i];
     i++;
   }
@@ -56,20 +56,20 @@ int q1(char *data){
 
   j=0;
   i=tam_dia+1;
-  while(data[i] > 47){
+  while(data[i] > 47){ //Verificar mes
     mm[j] = data[i];
     j++;
     i++;
   }
   mm[j]='\0';
-  while(mm[tam_mes] != '\0'){
+  while(mm[tam_mes] != '\0'){ 
     tam_mes++;
   }
 
   j=0;
   x=tam_mes+tam_dia+2;
 
-  while(data[x] != '\0'){
+  while(data[x] != '\0'){ //Verificar ano
     aa[j] = data[x];
     j++;
     x++;
@@ -80,11 +80,12 @@ int q1(char *data){
     a++;
   }
   aa[j]='\0';
-
+  //transformar char em int
   dia = atoi(dd);
   mes = atoi(mm);
   ano = atoi(aa);
-
+  
+  //validacao das datas
   if((mes >= 1 && mes <= 12) && (dia >= 1 && dia <= 31) && (ano >= 10 && ano <= 9999)){
     if((mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) && (dia >= 1 && dia <= 31)){
       return datavalida;
@@ -175,7 +176,7 @@ int q2(char *datainicial, char *datafinal, int *qtdDias, int *qtdMeses, int *qtd
     int diainicial, mesinicial, anoinicial;
     int diafinal, mesfinal, anofinal;
 
-    if(q1(datainicial) == 1){
+    if(q1(datainicial) == 1){ 
       puxardatas(datainicial, &dia, &mes, &ano);
       diainicial = dia;
       mesinicial = mes;
@@ -238,11 +239,11 @@ int q3(char *texto, char c, int isCaseSensitive){
   if(isCaseSensitive == 1){
   while(texto[tam_texto]!='\0'){
     if(texto[tam_texto] == c){
-    qnt_ocorrencias++;
+    qnt_ocorrencias++; 
     }
   tam_texto++;
   }
-  return qnt_ocorrencias;
+  return qnt_ocorrencias; //retorna numero de ocorrencias do carater buscado
   }
 
   else
@@ -252,7 +253,7 @@ int q3(char *texto, char c, int isCaseSensitive){
     }
   tam_texto++;
   }
-  return qnt_ocorrencias;
+  return qnt_ocorrencias; //retorna numero de ocorrencias do carater buscado
 }
 
 /*
@@ -277,24 +278,24 @@ int q4(char *strTexto, char *strBusca, int posicoes[30]){
   while(strBusca[tam_palavra] != '\0'){
     tam_palavra++;
   }
-
+  
   for(i = 0; strTexto[i]!='\0'; i++){
     if(strTexto[i]==-95 || strTexto[i]==-87 || strTexto[i]==-83 || strTexto[i]==-77 || strTexto[i]==-70 || strTexto[i]==-93 || strTexto[i]==-89 || strTexto[i]==-76)
-       cont_acento++;
+       cont_acento++; //Contagem de caracteres com acento
     if(strBusca[0] == strTexto[i]){
-      verificador_repeticao = 1;
+      verificador_repeticao = 1; //Verifica se tem ocorrencia da palavra no texto
       for(j = 0; j < tam_palavra; j++){
         if(strBusca[j] != strTexto[i + j]){
-          verificador_repeticao = 0;
+          verificador_repeticao = 0; //Caso nao tenha o retorno sera 0
           break;
         }
       }
-      if(verificador_repeticao == 1){
+      if(verificador_repeticao == 1){ //Caso tenha ele ira contar o numero de repeticao, a posicao onde comeca e onde finaliza
         cont_repeticao++;
         cont_posicao = cont_posicao + 2;
         qtdOcorrencias = cont_repeticao;
-        posicoes[cont_posicao] = i + 1 - cont_acento;
-        posicoes[cont_posicao+1] = i + tam_palavra - cont_acento;
+        posicoes[cont_posicao] = i + 1 - cont_acento; //posicao inicial, caso tenha acento ele ira retirar o excesso
+        posicoes[cont_posicao+1] = i + tam_palavra - cont_acento; //posicao final, caso tenha acento ele ira retirar o excesso
       }
     }   
   } 
@@ -314,7 +315,7 @@ int q4(char *strTexto, char *strBusca, int posicoes[30]){
 int q5(int num){
     int invert = 0, aux;
 
-    while(num > 0) {
+    while(num > 0) { //enquanto for maior que 0, o numero sera dividido e seu resto sera jogado numa variavel que multiplicara seu valor por 10 a cada loop 
         aux = num % 10;
         invert = invert * 10 + aux;
         num /= 10;
