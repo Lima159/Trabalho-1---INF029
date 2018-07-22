@@ -182,7 +182,7 @@ int q2(char *datainicial, char *datafinal, int *qtdDias, int *qtdMeses, int *qtd
       diainicial = dia;
       mesinicial = mes;
       anoinicial = ano;
-      printf("dia:%d\n mes:%d\n ano:%d\n", diainicial, mesinicial, anoinicial);
+      //printf("dia:%d\n mes:%d\n ano:%d\n", diainicial, mesinicial, anoinicial);
     }
     else
       return 2;
@@ -192,7 +192,7 @@ int q2(char *datainicial, char *datafinal, int *qtdDias, int *qtdMeses, int *qtd
       diafinal = dia;
       mesfinal = mes;
       anofinal = ano;
-      printf("dia:%d\n mes:%d\n ano:%d\n", diafinal, mesfinal, anofinal);
+      //printf("dia:%d\n mes:%d\n ano:%d\n", diafinal, mesfinal, anofinal);
     }
     else return 3;
 
