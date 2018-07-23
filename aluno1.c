@@ -23,6 +23,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include<string.h>
 
 void puxardatas();
 /*
@@ -42,10 +43,10 @@ void puxardatas();
 int q1(char *data){
   int datavalida = 1, datainvalida = 0;
   char dd[3], mm[3], aa[5];
-  int dia, mes, ano, i, tam_dia=0, tam_mes=0, tam_ano=0, j, x, a;
+  int dia, mes, ano, tam_dia=0, tam_mes=0, tam_ano=0, i, j, x, a;
 
   i=0;
-  while(data[i] > 47){ //Verificar dia
+  while(data[i] > 47){ //Puxar dia
     dd[i]=data[i];
     i++;
   }
@@ -56,7 +57,7 @@ int q1(char *data){
 
   j=0;
   i=tam_dia+1;
-  while(data[i] > 47){ //Verificar mês
+  while(data[i] > 47){ //Puxar mês
     mm[j] = data[i];
     j++;
     i++;
@@ -69,7 +70,7 @@ int q1(char *data){
   j=0;
   x=tam_mes+tam_dia+2;
 
-  while(data[x] != '\0'){ //Verificar ano
+  while(data[x] != '\0'){ //Puxar ano
     aa[j] = data[x];
     j++;
     x++;
@@ -118,9 +119,11 @@ int q1(char *data){
     3 -> datafinal inválida
     4 -> datainicial > datafinal
  */
-void puxardatas(char *data, int *dia, int *mes, int *ano){
+
+//puxarDatas é uma função para devolver os valores dia, mes e ano das variáveis datainicial e datafinal
+void puxarDatas(char *data, int *dia, int *mes, int *ano){
   char dd[3], mm[3], aa[5];
-  int i, tam_dia=0, tam_mes=0, tam_ano=0, j, x, a;
+  int tam_dia=0, tam_mes=0, tam_ano=0, i, j, x, a; //i, j, x, a servem como auxiliares para puxar dia, mes e ano como foi feito na Q1
 
   i=0;
   while(data[i] > 47){
@@ -177,29 +180,31 @@ int q2(char *datainicial, char *datafinal, int *qtdDias, int *qtdMeses, int *qtd
     int diafinal, mesfinal, anofinal;
     int calculovalido = 0;
 
+    //se a data for valida, puxa dia, mes e ano de datainicial, se não retorna 2(datainicial invalida)
     if(q1(datainicial) == 1){ 
-      puxardatas(datainicial, &dia, &mes, &ano);
+      puxarDatas(datainicial, &dia, &mes, &ano);
       diainicial = dia;
       mesinicial = mes;
       anoinicial = ano;
-      //printf("dia:%d\n mes:%d\n ano:%d\n", diainicial, mesinicial, anoinicial);
     }
     else
       return 2;
 
+    //se a data for valida, puxa dia, mes e ano de datafinal, se não retorna 3(datafinal invalida)
     if(q1(datafinal) == 1){
-      puxardatas(datafinal, &dia, &mes, &ano);
+      puxarDatas(datafinal, &dia, &mes, &ano);
       diafinal = dia;
       mesfinal = mes;
       anofinal = ano;
-      //printf("dia:%d\n mes:%d\n ano:%d\n", diafinal, mesfinal, anofinal);
     }
     else return 3;
 
+    //se data inicial for maior que datafinal retorna 4
     if((anoinicial > anofinal) || (anoinicial == anofinal && ((mesinicial > mesfinal) ||  ((mesinicial == mesfinal) && (diainicial > diafinal))))){
         return 4;
     }
 
+    //se data e calculo de diferença forem valido retorna calculovalido = 1
     else{
     nAnos = anofinal - anoinicial;
     if(mesfinal >= mesinicial){
@@ -270,14 +275,14 @@ int q2(char *datainicial, char *datafinal, int *qtdDias, int *qtdMeses, int *qtd
   } 
     calculovalido = 1;
   } 
+  //se calculovalido retornar 1, é devolvido a diferença(dia, mes e ano) do cálculo
   if(calculovalido ==1){
     *qtdDias = nDias;
     *qtdMeses = nMeses;
     *qtdAnos = nAnos;
     return 1;
   } 
-    
-	}
+ }
 
 
 /*
@@ -344,11 +349,11 @@ int q4(char *strTexto, char *strBusca, int posicoes[30]){
       verificador_repeticao = 1; //Verifica se tem ocorrência da palavra no texto
       for(j = 0; j < tam_palavra; j++){
         if(strBusca[j] != strTexto[i + j]){
-          verificador_repeticao = 0; //Caso não tenha o retorno sera 0
+          verificador_repeticao = 0; //Caso não tenha ocorrência o retorno sera 0
           break;
         }
       }
-      if(verificador_repeticao == 1){ //Caso tenha ele ira contar o número de repeticões, a posicão onde comeca e onde finaliza
+      if(verificador_repeticao == 1){ //Caso tenha ocorrência ele ira contar o número de repeticões, a posicão onde comeca e onde finaliza
         cont_repeticao++;
         cont_posicao = cont_posicao + 2;
         qtdOcorrencias = cont_repeticao;
@@ -378,7 +383,7 @@ int q5(int num){
         invert = invert * 10 + aux;
         num /= 10;
     }
-    return invert; 
+    return invert; //retorna o numero invertido
 }
 
 /*
@@ -397,14 +402,14 @@ int q6(int numerobase, int numerobusca){
 
   guard_numero = numerobusca; 
 
-  while(guard_numero != 0){ //Enquanto K for diferente de zero ele sera dividido para calcular seu tamanho
+  while(guard_numero != 0){ //Enquanto K(numerobusca) for diferente de zero ele sera dividido para calcular seu tamanho
   tamanho = tamanho * 10;
   guard_numero = guard_numero / 10;
 }
   guard_numero = numerobase;
 
   while(guard_numero != 0){
-    if(guard_numero % tamanho == numerobusca){ //Verifica se o resto da divisao do numero é igual a K 
+    if(guard_numero % tamanho == numerobusca){ //Verifica se o resto da divisao do numero(numerobase) é igual a K(numerobusca) 
       qtdOcorrencias++;
       guard_numero = guard_numero / tamanho;
     }
