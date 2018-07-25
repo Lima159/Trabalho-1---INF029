@@ -376,14 +376,14 @@ int q4(char *strTexto, char *strBusca, int posicoes[30]){
  */
 
 int q5(int num){
-    int invert = 0, aux;
+    int inverso = 0, guard;
 
-    while(num > 0) { //enquanto for maior que 0, o numero sera dividido e seu resto sera jogado numa variavel que multiplicara seu valor por 10 a cada loop 
-        aux = num % 10;
-        invert = invert * 10 + aux;
+    while(num > 0) { //enquanto for maior que 0, o número sera dividido e seu resto sera jogado numa variável que multiplicara seu valor por 10 a cada loop 
+        guard = num % 10;
+        inverso = inverso * 10 + guard;
         num /= 10;
     }
-    return invert; //retorna o numero invertido
+    return inverso; //retorna o numero invertido
 }
 
 /*
